@@ -9,7 +9,8 @@ enablePackage(language-c)
 %{
 #include<stdio.h>
 #include<stdlib.h>
-#include "example1.tab.h"
+include "example1.tab.h"
+include "example1.y"
 
 
 void printer(char*);  // Forward declaration of printing function
@@ -26,10 +27,6 @@ void printer(char*);  // Forward declaration of printing function
 
 digit	[0-9]
 alpha	[a-z,A-Z]
-boolean [tf]
-comparison [<>=]
-change [PM]
-anything [{digit}|{alpha}|{boolean}|{comparison}|{change}]
 
 
 
@@ -40,23 +37,24 @@ anything [{digit}|{alpha}|{boolean}|{comparison}|{change}]
  * of the file.
  */
 %%
+("if") {printer ("if Correct"); return IF;}
+{alpha}+"="({alpha}|{digit})* {printer ("Assign"); return ASSIGN;}
+("for") {printer ("For Loop"); return FOR;}
+("elif") {printer ("Elif Correct"); return ELIF;}
+("else") {printer ("Else Correct"); return ELSE;}
+("while") {printer ("while correct"); return WHILE;}
 
 "_"*{alpha}({alpha}|{digit}|"_")*	{ printer("Identifier"); return IDENT;}
-("+"|"-"|""){digit}+	 	{ printer("Integer"); return INT;
-"="                     { printer("Equals"); return EQUALS;}
+"=" { printer("Equals"); return EQUALS;}
 ("+") {printer("Plus"); return PLUS;}
-("-") {printer ("Minus"); return MINUS;}
-("*") {printer ("Times"); return TIMES;}
-("/") {printer ("Divide"); return DIVIDE;}
+("-") {printer ("Minus");return MINUS;}
+("*") {printer ("Times");return TIMES;}
+("/") {printer ("Divide");return DIVIDE;}
 ("(") {printer ("LParen"); return LPAREN;}
 (")") {printer ("RParen"); return RPAREN;}
 {digit}+"."{digit}+ {printer ("Float"); return FLOAT;}
-{alpha}+" = "({alpha}|{digit})* {printer ("Assign"); return ASSIGN;}
-"if("{boolean}") {"{alpha}+"}" {printer ("if loop Correct"); return IF;}
-"for("{alpha}"="{digit}", "{alpha}{comparison}{digit}+", "{alpha}":"{change}") ""{"{alpha}+"}" {printer ("For Loop"); return FOR;}
-"elif("{boolean}") {"{alpha}+"}" {printer ("elif Boolean Correct"); return ELIF;}
-"else ""{"{alpha}+"}" {printer ("Else Correct"); return ELSE;}
-"while("{boolean}") {"anything"}" {printer ("while loop correct"); return WHILE;}
+("+"|"-"|""){digit}+	 	{ printer("Integer"); return INT;}
+
 
 
 

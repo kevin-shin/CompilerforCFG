@@ -23,7 +23,7 @@ void parseprint(char*);  // forward declaration of printing function
 %}
 
 /* Next is the list of tokens this expects from the lexical analyzer.  We also specify
- * for tokens that are binary operations whether they are left-associative or right-associaive.
+ * for tokens that are binary operations whether they are left-associative or right-associative.
  * a left-associative operation is one where if we see a - b - c we prefer the interpretation
  * (a - b) - c over a - (b - c).
  */
@@ -31,10 +31,10 @@ void parseprint(char*);  // forward declaration of printing function
 %token INT
 %token IDENT
 %token EQUALS
-%token PLUS
-%token MINUS
-%token TIMES
-%token DIVIDE
+%left PLUS
+%left MINUS
+%left TIMES
+%left DIVIDE
 %token LPAREN
 %token RPAREN
 %token FLOAT
@@ -44,6 +44,7 @@ void parseprint(char*);  // forward declaration of printing function
 %token ELIF
 %token ELSE
 %token WHILE
+%token END
 
 
 %%
@@ -56,9 +57,57 @@ void parseprint(char*);  // forward declaration of printing function
 
 assignments:     assign                 // First rule allows a sequence of assignment statements of any length
 |                assign assignments
+| assign S
+| S
 ;
-assign:     IDENT EQUALS INT          { parseprint("assign -> id = int"); }
+assign:     IDENT EQUALS INT | IDENT EQUALS S          { parseprint("assign -> id = int"); }
 ;
+
+S: L
+| L S
+
+;
+
+L: end
+| E1 end
+end: END {parseprint("End");}
+;
+
+
+E1: E1 plus E1
+| E1 minus E1
+| E2
+;
+plus: PLUS { parseprint("Plus "); };
+minus: MINUS { parseprint("Minus"); }
+;
+
+E2: E2 times E2
+| E2 divide E2
+| E3;
+times: TIMES { parseprint("Times "); }
+;
+divide: DIVIDE { parseprint("Divide"); }
+;
+
+
+E3: int
+| float
+| ident
+| lparen E1 rparen
+;
+
+int: INT { parseprint("int recognized"); }
+;
+float: FLOAT { parseprint("float recognized"); }
+;
+ident: IDENT { parseprint("ident recognized"); }
+;
+lparen: LPAREN { parseprint("lparen recognized"); }
+;
+rparen: RPAREN { parseprint("rparen recognized"); }
+;
+
 
 
 %%
@@ -77,7 +126,7 @@ void parseprint(char* str)
 
 
 int main() {
-  fprintf(stderr, "Enter statements/expressions to parse:\n"
+  fprintf(stderr, "Enter statements/expressions to parse:\n");
   int res = yyparse();
   if (res == 0)
     fprintf(stderr, "Successful parsing.\n");

@@ -9,7 +9,7 @@ enablePackage(language-c)
 %{
 #include<stdio.h>
 #include<stdlib.h>
-#include "example1.tab.h"
+#include "myLang.tab.h"
 
 
 void printer(char*);  // Forward declaration of printing function
@@ -26,10 +26,6 @@ void printer(char*);  // Forward declaration of printing function
 
 digit	[0-9]
 alpha	[a-z,A-Z]
-boolean [tf]
-comparison [<>=]
-change [PM]
-anything [{digit}|{alpha}|{boolean}|{comparison}|{change}]
 
 
 
@@ -40,23 +36,23 @@ anything [{digit}|{alpha}|{boolean}|{comparison}|{change}]
  * of the file.
  */
 %%
+("if") {printer ("if Correct"); return IF;}
+("for") {printer ("For Loop"); return FOR;}
+("elif") {printer ("Elif Correct"); return ELIF;}
+("else") {printer ("Else Correct"); return ELSE;}
+("while") {printer ("while correct"); return WHILE;}
 
-"_"*{alpha}({alpha}|{digit}|"_")*	{ printer("Identifier"); }
-("+"|"-"|""){digit}+	 	{ printer("Integer"); }
-"="                     { printer("Equals"); }
-("+") {printer("Plus");}
-("-") {printer ("Minus");}
-("*") {printer ("Times");}
-("/") {printer ("Divide");}
-("(") {printer ("LParen");}
-(")") {printer ("RParen");}
-{digit}+"."{digit}+ {printer ("Float");}
-{alpha}+" = "({alpha}|{digit})* {printer ("Assign");}
-"if("{boolean}") {"{alpha}+"}" {printer ("Boolean Correct");}
-"for("{alpha}"="{digit}", "{alpha}{comparison}{digit}+", "{alpha}":"{change}") ""{"{alpha}+"}" {printer ("For Loop");}
-"elif("{boolean}") {"{alpha}+"}" {printer ("elif Boolean Correct");}
-"else ""{"{alpha}+"}" {printer ("Else Correct");}
-"while("{boolean}") {"anything"}" {printer ("while loop correct"); }
+"_"*{alpha}({alpha}|{digit}|"_")*	{ printer("Identifier"); return IDENT;}
+"=" { printer("Equals"); return EQUALS;}
+("+") {printer("Plus"); return PLUS;}
+("-") {printer ("Minus");return MINUS;}
+("*") {printer ("Times");return TIMES;}
+("/") {printer ("Divide");return DIVIDE;}
+("(") {printer ("LParen"); return LPAREN;}
+(")") {printer ("RParen"); return RPAREN;}
+{digit}+"."{digit}+ {printer ("Float"); return FLOAT;}
+{digit}+	 { printer("Integer"); return INT;}
+(".") {printer ("END"); return END;}
 
 
 

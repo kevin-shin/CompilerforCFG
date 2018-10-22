@@ -54,7 +54,8 @@
      FOR = 270,
      ELIF = 271,
      ELSE = 272,
-     WHILE = 273
+     WHILE = 273,
+     END = 274
    };
 #endif
 /* Tokens.  */
@@ -74,6 +75,7 @@
 #define ELIF 271
 #define ELSE 272
 #define WHILE 273
+#define END 274
 
 
 
