@@ -43,23 +43,23 @@
      IDENT = 259,
      EQUALS = 260,
      ASSIGN = 261,
-     INT = 262,
-     FLOAT = 263,
-     LPAREN = 264,
-     RPAREN = 265,
-     MINUS = 266,
-     PLUS = 267,
-     DIVIDE = 268,
-     TIMES = 269,
-     LCURLY = 270,
-     RCURLY = 271,
-     IF = 272,
-     FOR = 273,
-     ELSE = 274,
-     ELIF = 275,
-     WHILE = 276,
-     THEN = 277,
-     DO = 278
+     LESSTHAN = 262,
+     GREATERTHAN = 263,
+     INT = 264,
+     FLOAT = 265,
+     LPAREN = 266,
+     RPAREN = 267,
+     MINUS = 268,
+     PLUS = 269,
+     DIVIDE = 270,
+     TIMES = 271,
+     LCURLY = 272,
+     RCURLY = 273,
+     IF = 274,
+     FOR = 275,
+     ELSE = 276,
+     ELIF = 277,
+     WHILE = 278
    };
 #endif
 /* Tokens.  */
@@ -67,23 +67,23 @@
 #define IDENT 259
 #define EQUALS 260
 #define ASSIGN 261
-#define INT 262
-#define FLOAT 263
-#define LPAREN 264
-#define RPAREN 265
-#define MINUS 266
-#define PLUS 267
-#define DIVIDE 268
-#define TIMES 269
-#define LCURLY 270
-#define RCURLY 271
-#define IF 272
-#define FOR 273
-#define ELSE 274
-#define ELIF 275
-#define WHILE 276
-#define THEN 277
-#define DO 278
+#define LESSTHAN 262
+#define GREATERTHAN 263
+#define INT 264
+#define FLOAT 265
+#define LPAREN 266
+#define RPAREN 267
+#define MINUS 268
+#define PLUS 269
+#define DIVIDE 270
+#define TIMES 271
+#define LCURLY 272
+#define RCURLY 273
+#define IF 274
+#define FOR 275
+#define ELSE 276
+#define ELIF 277
+#define WHILE 278
 
 
 

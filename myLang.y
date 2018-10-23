@@ -30,13 +30,13 @@ void parseprint(char*);  // forward declaration of printing function
 
 %token END
 %token IDENT
-%token EQUALS ASSIGN
+%token EQUALS ASSIGN LESSTHAN GREATERTHAN
 %token INT FLOAT
 %token LPAREN RPAREN
 %left PLUS MINUS
 %left TIMES DIVIDE
 %token LCURLY RCURLY
-%token IF FOR ELSE ELIF WHILE THEN DO
+%token IF FOR ELSE ELIF WHILE
 
 
 
@@ -53,36 +53,56 @@ S: L {parseprint("S1");}
 | L S {parseprint("S2");}
 ;
 
-L: end {parseprint("L1");}
-| E1 end {parseprint("L2");}
-| statements end {parseprint("L3");}
-| expressions end {parseprint("L4");}
+L: end {parseprint("ENDLINE");}
+| E1 end {parseprint("ARITHMETIC");}
+| statements end {parseprint("STATEMENTS");}
+| expressions end {parseprint("EXPRESSIONS");}
 ;
 end: END {parseprint("End");}
 ;
 
 statements: assignments
 | ifstate
+| elifstate
+| elsestate
+| forstate
+| whilestate
 | block
 ;
 
 expressions: IDENT EQUALS E1  { parseprint("expressions recognized"); }
 | IDENT EQUALS E1 expressions
+| IDENT LESSTHAN E1
+| IDENT GREATERTHAN E1
+| IDENT LESSTHAN E1 expressions
+| IDENT GREATERTHAN E1 expressions
 ;
 
 
 assignments: assign
 | assign assignments
 ;
-assign:	 IDENT ASSIGN INT { parseprint("assignment works"); }
+assign:	 IDENT ASSIGN E1 { parseprint("assignment works"); }
 ;
 
-ifstate : if condition then block;
-if: IF { parseprint("if statement recognized"); };
-then: THEN {parseprint("then recognized")};
+ifstate : IF condition block { parseprint("if statement recognized"); }
 ;
 
+elifstate : ELIF condition block { parseprint("elif statement recognized"); }
+;
 
+elsestate : ELSE block { parseprint("elif statement recognized"); }
+;
+
+forstate: FOR rangecount block { parseprint("for statement recognized"); }
+;
+
+whilestate: WHILE condition block { parseprint("while statement recognized"); }
+;
+
+rangecount: LPAREN IDENT ASSIGN INT END IDENT LESSTHAN INT END IDENT PLUS PLUS RPAREN
+| LPAREN IDENT EQUALS INT END IDENT GREATERTHAN INT END IDENT MINUS MINUS RPAREN
+;
 
 condition: LPAREN expressions RPAREN {parseprint("Condition Works");};
 
@@ -107,9 +127,9 @@ divide: DIVIDE { parseprint("Divide recognized"); }
 E3: int
 | float
 | ident
-| lparen E1 rparen
+| LPAREN E1 RPAREN
 ;
-int: INT { parseprint("int recognized"); }
+int: INT| MINUS INT { parseprint("int recognized"); }
 float: FLOAT { parseprint("float recognized"); }
 ident: IDENT { parseprint("ident recognized"); }
 ;

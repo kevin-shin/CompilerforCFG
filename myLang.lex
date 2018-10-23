@@ -41,12 +41,12 @@ alpha	[a-z,A-Z]
 ("elif") {printer ("Elif Correct"); return ELIF;}
 ("else") {printer ("Else Correct"); return ELSE;}
 ("while") {printer ("while correct"); return WHILE;}
-("then") {printer ("then correct"); return THEN;}
-("do") {printer ("do correct"); return DO;}
 
 "_"*{alpha}({alpha}|{digit}|"_")*	{ printer("Identifier"); return IDENT;}
 ("==") { printer("Equals"); return EQUALS;}
 ("=") {printer("Assign"); return ASSIGN;}
+{digit}+"."{digit}+ {printer ("Float"); return FLOAT;}
+{digit}+	 { printer("Integer"); return INT;}
 ("+") {printer("Plus"); return PLUS;}
 ("-") {printer ("Minus");return MINUS;}
 ("*") {printer ("Times");return TIMES;}
@@ -55,8 +55,8 @@ alpha	[a-z,A-Z]
 (")") {printer ("RParen"); return RPAREN;}
 ("{") {printer ("LCurly"); return LCURLY;}
 ("}") {printer ("RCurly"); return RCURLY;}
-{digit}+"."{digit}+ {printer ("Float"); return FLOAT;}
-{digit}+	 { printer("Integer"); return INT;}
+("<") {printer ("LessThan"); return LESSTHAN;}
+(">") {printer ("GreaterThan"); return GREATERTHAN;}
 (";") {printer("End L"); return END;}
 
 [ \t\n]+		;  /*when see whitespace, do nothing*/
