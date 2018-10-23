@@ -39,43 +39,51 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     INT = 258,
+     END = 258,
      IDENT = 259,
      EQUALS = 260,
-     PLUS = 261,
-     MINUS = 262,
-     TIMES = 263,
-     DIVIDE = 264,
-     LPAREN = 265,
-     RPAREN = 266,
-     FLOAT = 267,
-     ASSIGN = 268,
-     IF = 269,
-     FOR = 270,
-     ELIF = 271,
-     ELSE = 272,
-     WHILE = 273,
-     END = 274
+     ASSIGN = 261,
+     INT = 262,
+     FLOAT = 263,
+     LPAREN = 264,
+     RPAREN = 265,
+     MINUS = 266,
+     PLUS = 267,
+     DIVIDE = 268,
+     TIMES = 269,
+     LCURLY = 270,
+     RCURLY = 271,
+     IF = 272,
+     FOR = 273,
+     ELSE = 274,
+     ELIF = 275,
+     WHILE = 276,
+     THEN = 277,
+     DO = 278
    };
 #endif
 /* Tokens.  */
-#define INT 258
+#define END 258
 #define IDENT 259
 #define EQUALS 260
-#define PLUS 261
-#define MINUS 262
-#define TIMES 263
-#define DIVIDE 264
-#define LPAREN 265
-#define RPAREN 266
-#define FLOAT 267
-#define ASSIGN 268
-#define IF 269
-#define FOR 270
-#define ELIF 271
-#define ELSE 272
-#define WHILE 273
-#define END 274
+#define ASSIGN 261
+#define INT 262
+#define FLOAT 263
+#define LPAREN 264
+#define RPAREN 265
+#define MINUS 266
+#define PLUS 267
+#define DIVIDE 268
+#define TIMES 269
+#define LCURLY 270
+#define RCURLY 271
+#define IF 272
+#define FOR 273
+#define ELSE 274
+#define ELIF 275
+#define WHILE 276
+#define THEN 277
+#define DO 278
 
 
 

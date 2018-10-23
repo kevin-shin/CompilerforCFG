@@ -28,23 +28,16 @@ void parseprint(char*);  // forward declaration of printing function
  * (a - b) - c over a - (b - c).
  */
 
-%token INT
-%token IDENT
-%token EQUALS
-%left PLUS
-%left MINUS
-%left TIMES
-%left DIVIDE
-%token LPAREN
-%token RPAREN
-%token FLOAT
-%token ASSIGN
-%token IF
-%token FOR
-%token ELIF
-%token ELSE
-%token WHILE
 %token END
+%token IDENT
+%token EQUALS ASSIGN
+%token INT FLOAT
+%token LPAREN RPAREN
+%left PLUS MINUS
+%left TIMES DIVIDE
+%token LCURLY RCURLY
+%token IF FOR ELSE ELIF WHILE THEN DO
+
 
 
 %%
@@ -55,39 +48,59 @@ void parseprint(char*);  // forward declaration of printing function
  * additional rules follow, one per line, with a semi-colon marking the end of a set of rules for a given LHS
  */
 
-assignments:     assign                 // First rule allows a sequence of assignment statements of any length
-|                assign assignments
-| assign S
-| S
-;
-assign:     IDENT EQUALS INT | IDENT EQUALS S          { parseprint("assign -> id = int"); }
+
+S: L {parseprint("S1");}
+| L S {parseprint("S2");}
 ;
 
-S: L
-| L S
-
+L: end {parseprint("L1");}
+| E1 end {parseprint("L2");}
+| statements end {parseprint("L3");}
+| expressions end {parseprint("L4");}
 ;
-
-L: end
-| E1 end
 end: END {parseprint("End");}
 ;
 
+statements: assignments
+| ifstate
+| block
+;
+
+expressions: IDENT EQUALS E1  { parseprint("expressions recognized"); }
+| IDENT EQUALS E1 expressions
+;
+
+
+assignments: assign
+| assign assignments
+;
+assign:	 IDENT ASSIGN INT { parseprint("assignment works"); }
+;
+
+ifstate : if condition then block;
+if: IF { parseprint("if statement recognized"); };
+then: THEN {parseprint("then recognized")};
+;
+
+
+
+condition: LPAREN expressions RPAREN {parseprint("Condition Works");};
+
+block: LCURLY S RCURLY { parseprint("Block works"); };
 
 E1: E1 plus E1
 | E1 minus E1
 | E2
 ;
-plus: PLUS { parseprint("Plus "); };
-minus: MINUS { parseprint("Minus"); }
+plus: PLUS { parseprint("Plus recognized"); };
+minus: MINUS { parseprint("Minus recognized"); }
 ;
 
 E2: E2 times E2
 | E2 divide E2
 | E3;
-times: TIMES { parseprint("Times "); }
-;
-divide: DIVIDE { parseprint("Divide"); }
+times: TIMES { parseprint("Times recognized"); }
+divide: DIVIDE { parseprint("Divide recognized"); }
 ;
 
 
@@ -96,16 +109,9 @@ E3: int
 | ident
 | lparen E1 rparen
 ;
-
 int: INT { parseprint("int recognized"); }
-;
 float: FLOAT { parseprint("float recognized"); }
-;
 ident: IDENT { parseprint("ident recognized"); }
-;
-lparen: LPAREN { parseprint("lparen recognized"); }
-;
-rparen: RPAREN { parseprint("rparen recognized"); }
 ;
 
 
