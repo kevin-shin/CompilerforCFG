@@ -22,6 +22,6 @@ These steps above take the bison and flex files and create the C code and lexica
 
 
 
-This project was created as part of an assignment in Theory of Computation, taught by Daniel Kluver Fall 2018 at Macalester College. I received his help and guidance, as well as that of my teammates Juliet, Paige, and Tom. 
+This project was created as part of an assignment in Theory of Computation, taught by Daniel Kluver Fall 2018 at Macalester College. I received his help and guidance, and the instructions for running the executable are taken directly from his project description. I also received the help of my teammates Juliet, Paige, and Tom. 
 
 
