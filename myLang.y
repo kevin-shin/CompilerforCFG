@@ -49,8 +49,8 @@ void parseprint(char*);  // forward declaration of printing function
  */
 
 
-S: L {parseprint("S1");}
-| L S {parseprint("S2");}
+S: L
+| L S
 ;
 
 L: end {parseprint("ENDLINE");}
@@ -58,7 +58,7 @@ L: end {parseprint("ENDLINE");}
 | statements end {parseprint("STATEMENTS");}
 | expressions end {parseprint("EXPRESSIONS");}
 ;
-end: END {parseprint("End");}
+end: END
 ;
 
 statements: assignments
@@ -70,7 +70,7 @@ statements: assignments
 | block
 ;
 
-expressions: IDENT EQUALS E1  { parseprint("expressions recognized"); }
+expressions: IDENT EQUALS E1
 | IDENT EQUALS E1 expressions
 | IDENT LESSTHAN E1
 | IDENT GREATERTHAN E1
@@ -82,31 +82,31 @@ expressions: IDENT EQUALS E1  { parseprint("expressions recognized"); }
 assignments: assign
 | assign assignments
 ;
-assign:	 IDENT ASSIGN E1 { parseprint("assignment works"); }
+assign:	 IDENT ASSIGN E1 { parseprint("Assignment"); }
 ;
 
-ifstate : IF condition block { parseprint("if statement recognized"); }
+ifstate : IF condition block { parseprint("If statement"); }
 ;
 
-elifstate : ELIF condition block { parseprint("elif statement recognized"); }
+elifstate : ELIF condition block { parseprint("Elif statement"); }
 ;
 
-elsestate : ELSE block { parseprint("elif statement recognized"); }
+elsestate : ELSE block { parseprint("Else statement"); }
 ;
 
-forstate: FOR rangecount block { parseprint("for statement recognized"); }
+forstate: FOR rangecount block { parseprint("For Loop"); }
 ;
 
-whilestate: WHILE condition block { parseprint("while statement recognized"); }
+whilestate: WHILE condition block { parseprint("While Loop"); }
 ;
 
 rangecount: LPAREN IDENT ASSIGN INT END IDENT LESSTHAN INT END IDENT PLUS PLUS RPAREN
 | LPAREN IDENT EQUALS INT END IDENT GREATERTHAN INT END IDENT MINUS MINUS RPAREN
 ;
 
-condition: LPAREN expressions RPAREN {parseprint("Condition Works");};
+condition: LPAREN expressions RPAREN {parseprint("Condition");};
 
-block: LCURLY S RCURLY { parseprint("Block works"); };
+block: LCURLY S RCURLY { parseprint("Block Recognized."); };
 
 E1: E1 plus E1
 | E1 minus E1

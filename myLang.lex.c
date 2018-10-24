@@ -372,10 +372,10 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[46] =
     {   0,
-        0,    0,   24,   23,   22,   13,   14,   11,    9,    6,
-       10,   12,   20,   21,   17,    8,   18,   23,    6,    6,
-        6,    6,   15,   16,   22,    6,    0,   20,    7,    6,
-        0,    6,    6,    1,    6,   19,    6,    6,    2,    6,
+        0,    0,   24,   23,   22,   15,   16,   13,   11,    6,
+       12,   14,   10,   21,   19,    8,   20,   23,    6,    6,
+        6,    6,   17,   18,   22,    6,    0,   10,    7,    6,
+        0,    6,    6,    1,    6,    9,    6,    6,    2,    6,
         3,    4,    6,    5,    0
     } ;
 
@@ -812,62 +812,62 @@ YY_RULE_SETUP
 case 9:
 YY_RULE_SETUP
 #line 48 "myLang.lex"
-{printer("Plus"); return PLUS;}
+{printer ("Float"); return FLOAT;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 49 "myLang.lex"
-{printer ("Minus");return MINUS;}
+{ printer("Integer"); return INT;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 50 "myLang.lex"
-{printer ("Times");return TIMES;}
+{printer("Plus"); return PLUS;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 51 "myLang.lex"
-{printer ("Divide");return DIVIDE;}
+{printer ("Minus");return MINUS;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 52 "myLang.lex"
-{printer ("LParen"); return LPAREN;}
+{printer ("Times");return TIMES;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 53 "myLang.lex"
-{printer ("RParen"); return RPAREN;}
+{printer ("Divide");return DIVIDE;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 54 "myLang.lex"
-{printer ("LCurly"); return LCURLY;}
+{printer ("LParen"); return LPAREN;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 55 "myLang.lex"
-{printer ("RCurly"); return RCURLY;}
+{printer ("RParen"); return RPAREN;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 56 "myLang.lex"
-{printer ("LessThan"); return LESSTHAN;}
+{printer ("LCurly"); return LCURLY;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 57 "myLang.lex"
-{printer ("GreaterThan"); return GREATERTHAN;}
+{printer ("RCurly"); return RCURLY;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 58 "myLang.lex"
-{printer ("Float"); return FLOAT;}
+{printer ("LessThan"); return LESSTHAN;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 59 "myLang.lex"
-{ printer("Integer"); return INT;}
+{printer ("GreaterThan"); return GREATERTHAN;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP

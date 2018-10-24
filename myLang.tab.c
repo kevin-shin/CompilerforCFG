@@ -1441,17 +1441,7 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-#line 52 "myLang.y"
-    {parseprint("S1");;}
-    break;
-
-  case 3:
-#line 53 "myLang.y"
-    {parseprint("S2");;}
-    break;
-
-  case 4:
+        case 4:
 #line 56 "myLang.y"
     {parseprint("ENDLINE");;}
     break;
@@ -1471,54 +1461,44 @@ yyreduce:
     {parseprint("EXPRESSIONS");;}
     break;
 
-  case 8:
-#line 61 "myLang.y"
-    {parseprint("End");;}
-    break;
-
-  case 16:
-#line 73 "myLang.y"
-    { parseprint("expressions recognized"); ;}
-    break;
-
   case 24:
 #line 85 "myLang.y"
-    { parseprint("assignment works"); ;}
+    { parseprint("Assignment"); ;}
     break;
 
   case 25:
 #line 88 "myLang.y"
-    { parseprint("if statement recognized"); ;}
+    { parseprint("If statement"); ;}
     break;
 
   case 26:
 #line 91 "myLang.y"
-    { parseprint("elif statement recognized"); ;}
+    { parseprint("Elif statement"); ;}
     break;
 
   case 27:
 #line 94 "myLang.y"
-    { parseprint("elif statement recognized"); ;}
+    { parseprint("Else statement"); ;}
     break;
 
   case 28:
 #line 97 "myLang.y"
-    { parseprint("for statement recognized"); ;}
+    { parseprint("For Loop"); ;}
     break;
 
   case 29:
 #line 100 "myLang.y"
-    { parseprint("while statement recognized"); ;}
+    { parseprint("While Loop"); ;}
     break;
 
   case 32:
 #line 107 "myLang.y"
-    {parseprint("Condition Works");;}
+    {parseprint("Condition");;}
     break;
 
   case 33:
 #line 109 "myLang.y"
-    { parseprint("Block works"); ;}
+    { parseprint("Block Recognized."); ;}
     break;
 
   case 37:
@@ -1558,7 +1538,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1562 "myLang.tab.c"
+#line 1542 "myLang.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

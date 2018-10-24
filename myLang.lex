@@ -57,7 +57,7 @@ alpha	[a-z,A-Z]
 ("}") {printer ("RCurly"); return RCURLY;}
 ("<") {printer ("LessThan"); return LESSTHAN;}
 (">") {printer ("GreaterThan"); return GREATERTHAN;}
-(";") {printer("End L"); return END;}
+(";") {printer("End of Line"); return END;}
 
 [ \t\n]+		;  /*when see whitespace, do nothing*/
 
